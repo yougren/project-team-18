@@ -72,20 +72,36 @@ public class Board {
 	public Result attack(int x, char y) {
 		Square target = new Square(x, y);
 		Result rezz = new Result();
+
+		//check against board dimensions
 		if(x < 1 || x > 10 || y < 'A' || y > 'J'){
 			rezz.setResult(AtackStatus.INVALID);
 			return rezz;
 		}
+
+		//check against previous attacks
+		for (Result att : this.attacks) {
+		    Square filled = att.getLocation();
+            if (filled.getColumn() == target.getColumn() && filled.getRow() == target.getRow()) {   //it is a hit
+                rezz.setResult(AtackStatus.INVALID);
+                return rezz;
+            }
+        }
+
+        //check against ships to see if hit
+        rezz.setLocation(target);
 		for (Ship placed : this.getShips()) {                             //cycle through all ships
 			for (Square filled : placed.getOccupiedSquares()) {     //cycle through every square those ships occupy
-				if (filled.getColumn() == target.getColumn() && filled.getRow() == target.getRow()) {                   //break on a conflict
+				if (filled.getColumn() == target.getColumn() && filled.getRow() == target.getRow()) {   //it is a hit
 					rezz.setResult(AtackStatus.HIT);
 					rezz.setShip(placed);
-					rezz.setLocation(filled);
+					this.attacks.add(rezz);
 					return rezz;
 				}
 			}
 		}
+
+		this.attacks.add(rezz);
 		rezz.setResult(AtackStatus.MISS);
 		return rezz;
 	}

@@ -13,6 +13,7 @@ public class Ship {
 	public Ship(){
 		this.occupiedSquares = new ArrayList<>();
 	}
+	public Ship(int length) { this.occupiedSquares = new ArrayList<>(length); this.length = length;}
 
 	public Ship(String kind) {
 		kind = kind.toUpperCase();
