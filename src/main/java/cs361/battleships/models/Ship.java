@@ -8,7 +8,11 @@ import java.util.List;
 public class Ship {
 
 	@JsonProperty private List<Square> occupiedSquares;
-	
+
+	public Ship(){
+		this.occupiedSquares = new ArrayList<>();
+	}
+
 	public Ship(String kind) {
 		kind = kind.toUpperCase();
 		switch(kind){
