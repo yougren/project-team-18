@@ -20,11 +20,4 @@ public class GameTest {
         int randrow = game.randRow();
         assertTrue(randrow >= 1 && randrow <= 10);
     }
-
-    @Test
-    public void testRandomVertical(){
-        Game game = new Game();
-        boolean vertical = game.randVertical();
-        assertTrue(String.valueOf(vertical).equals("true") || String.valueOf(vertical).equals("false"));
-    }
 }
