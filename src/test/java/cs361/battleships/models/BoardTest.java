@@ -61,5 +61,4 @@ public class BoardTest {
 //        board.placeShip(ship, 5, 'd', true);
 //        assertTrue(board.attack(5, 'd').getResult() == AtackStatus.HIT);
     }
-
 }
