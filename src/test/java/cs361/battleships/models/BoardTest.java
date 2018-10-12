@@ -20,7 +20,7 @@ public class BoardTest {
     public void testBoardGetAttacks() {
         Board board = new Board();
 
-        assertTrue(board.getAttacks() instanceof List);
+        assertNotNull(board.getAttacks());
     }
     @Test
     public void testBoardHeightInitial() {
@@ -58,5 +58,11 @@ public class BoardTest {
         //Get width, and make sure it is the same
         int setWidth = board.getWidth();
         assertEquals(testWidth, setWidth);
+    }
+
+    @Test
+    public void testBoardGetShips(){
+        Board board = new Board();
+        assertNotNull(board.getShips());
     }
 }
