@@ -26,8 +26,37 @@ public class Board {
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
 	public boolean placeShip(Ship ship, int x, char y, boolean isVertical) {
-		// TODO Implement
-		return false;
+		//passed square is the bottom-left of the ship (depending on orientation)
+		//we must check to make sure the squares are not occupied
+
+		List<Square> candidate = ship.getOccupiedSquares();
+
+		//generate a candidate array of locations
+		for(int i = 0; i < candidate.size(); i++) {
+			int XC = x + (isVertical ? 0 : i);
+			char YC = (char) ((int) y + (isVertical ? i : 0));
+
+			//make sure the ship is within the bounds of the board
+			if (XC > this.width || XC < 1 || YC > this.height || YC < 1) { return false; }
+
+			candidate.add(i, new Square(XC, YC));
+		}
+
+		//ensure the ship is not conflicting with another ship
+		for(Ship placed : this.ships) {
+			for (Square filled : placed.getOccupiedSquares()) {
+				for (Square attempt : candidate) {
+					if (filled.equals(attempt)) {
+						return false;
+					}
+				}
+			}
+		}
+
+		ship.setOccupiedSquares(candidate);
+		this.ships.add(ship);
+
+		return true;
 	}
 
 	/*
@@ -68,7 +97,10 @@ public class Board {
 		this.width = width;
 	}
 
-	public int getWidth() {
+	public int getWidth()
+	{
 		return this.width;
+	}
+
 	}
 }

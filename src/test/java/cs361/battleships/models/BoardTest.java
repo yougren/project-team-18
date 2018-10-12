@@ -25,6 +25,40 @@ public class BoardTest {
     }
 
     @Test
+    public void testBoardEmptyPlaceShip() {
+        Board board = new Board();
+        Ship ship = new Ship("DESTROYER");
+        assertTrue(board.placeShip(ship, 10, 'a', false));
+    }
+
+    @Test
+    public void testBoardConflictPlaceShip() {
+        Board board = new Board();
+        Ship destroyer = new Ship("DESTROYER");
+        Ship cruiser = new Ship("CRUISER");
+        Ship battle = new Ship("BATTLESHIP");
+
+        boolean placeInitial = board.placeShip(destroyer, 5, 'd', false);
+        assertTrue(placeInitial);
+        boolean placeConflict = board.placeShip(cruiser, 5, 'd', true);
+        assertFalse(placeConflict);
+        boolean placeConflictEnd = board.placeShip(battle, 3, 'd', false);
+        assertFalse(placeConflictEnd);
+    }
+
+    @Test
+    public void testBoardOutOfBoundsPlaceShip() {
+        Board board = new Board();
+        Ship destroyer = new Ship("DESTROYER");
+        Ship cruiser = new Ship("CRUISER");
+
+        boolean placeOut = board.placeShip(destroyer, 5, 'd', false);
+        assertFalse(placeOut);
+        boolean placeEndOut = board.placeShip(cruiser, 5, 'j', true);
+        assertFalse(placeEndOut);
+    }
+
+    @Test
     public void testBoardHeightSet() {
         //Initialize board
         Board board = new Board();
