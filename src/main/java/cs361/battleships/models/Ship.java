@@ -8,7 +8,7 @@ import java.util.List;
 public class Ship {
 
 	@JsonProperty private List<Square> occupiedSquares;
-  private int length;
+  	private int length;
 
 	public Ship(){
 		this.occupiedSquares = new ArrayList<>();
@@ -21,11 +21,11 @@ public class Ship {
 				this.occupiedSquares = new ArrayList<>(4);
 				this.length = 4;
 				break;
-			case("CRUISER"):
+			case("DESTROYER"):
 				this.occupiedSquares = new ArrayList<>(3);
 				this.length = 3;
 				break;
-			case("DESTROYER"):
+			case("MINESWEEPER"):
 				this.occupiedSquares = new ArrayList<>(2);
 				this.length = 2;
 				break;
@@ -34,12 +34,11 @@ public class Ship {
 
 	public List<Square> getOccupiedSquares() {
 		return this.occupiedSquares;
-		
 	}
 
 	public void setOccupiedSquares(List<Square> squares){
 		this.occupiedSquares = squares;
-    this.length = squares.size();
+    	this.length = squares.size();
 	}
 
 	public int getLength() {
