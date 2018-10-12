@@ -34,8 +34,18 @@ public class Board {
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
 	public Result attack(int x, char y) {
-		//TODO Implement
-		return null;
+		Square target = new Square(x, y);
+		Result rezz = new Result();
+		for (Ship placed : this.getShips()) {                             //cycle through all ships
+			for (Square filled : placed.getOccupiedSquares()) {     //cycle through every square those ships occupy
+				if (filled.equals(target)) {                   //break on a conflict
+					rezz.setResult(AtackStatus.HIT);
+					return rezz;
+				}
+			}
+		}
+		rezz.setResult(AtackStatus.MISS);
+		return rezz;
 	}
 
 	public List<Ship> getShips() {
