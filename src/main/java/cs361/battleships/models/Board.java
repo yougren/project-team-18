@@ -37,10 +37,16 @@ public class Board {
 	public Result attack(int x, char y) {
 		Square target = new Square(x, y);
 		Result rezz = new Result();
+		if(x < 1 || x > 10 || y < 'A' || y > 'J'){
+			rezz.setResult(AtackStatus.INVALID);
+			return rezz;
+		}
 		for (Ship placed : this.getShips()) {                             //cycle through all ships
 			for (Square filled : placed.getOccupiedSquares()) {     //cycle through every square those ships occupy
-				if (filled.equals(target)) {                   //break on a conflict
+				if (filled.getColumn() == target.getColumn() && filled.getRow() == target.getRow()) {                   //break on a conflict
 					rezz.setResult(AtackStatus.HIT);
+					rezz.setShip(placed);
+					rezz.setLocation(filled);
 					return rezz;
 				}
 			}

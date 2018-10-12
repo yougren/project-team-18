@@ -11,8 +11,8 @@ public class GameTest {
     public void testRandomColumn(){
         Game game = new Game();
         int randcol = (int)game.randCol();
-        //implicit int-char comparison converts 'I' and 'A' to their respective ascii values
-        assertTrue(randcol <= 'I');
+        //implicit int-char comparison converts 'J' and 'A' to their respective ascii values
+        assertTrue(randcol <= 'J');
         assertTrue(randcol >= 'A');
     }
 
