@@ -16,7 +16,8 @@ public class Board {
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
 	public Board() {
-
+		ships = new ArrayList<>();
+		attacks = new ArrayList<>();
 		//current, and only board configuration is 10x10
 		this.height = 10;
 		this.width = 10;
