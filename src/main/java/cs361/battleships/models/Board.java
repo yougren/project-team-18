@@ -33,26 +33,29 @@ public class Board {
 
 		//generate a candidate array of locations
 		for(int i = 0; i < candidate.size(); i++) {
+
+		    //generate coordinates for new squares
 			int XC = x + (isVertical ? 0 : i);
-			char YC = (char) ((int) y + (isVertical ? i : 0));
+			int YC = (y + (isVertical ? i : 0) - 'A');  //must convert out of unicode
 
 			//make sure the ship is within the bounds of the board
 			if (XC > this.width || XC < 1 || YC > this.height || YC < 1) { return false; }
 
-			candidate.add(i, new Square(XC, YC));
+			candidate.add(i, new Square(XC, (char)(YC + 'A')));
 		}
 
 		//ensure the ship is not conflicting with another ship
-		for(Ship placed : this.ships) {
-			for (Square filled : placed.getOccupiedSquares()) {
-				for (Square attempt : candidate) {
-					if (filled.equals(attempt)) {
+		for(Ship placed : this.ships) {                             //cycle through all ships
+			for (Square filled : placed.getOccupiedSquares()) {     //cycle through every square those ships occupy
+				for (Square attempt : candidate) {                  //cycle through every square we want to add.
+					if (filled.equals(attempt)) {                   //break on a conflict
 						return false;
 					}
 				}
 			}
 		}
 
+		//there were no conflicts, so sync the ship squares and add the ship
 		ship.setOccupiedSquares(candidate);
 		this.ships.add(ship);
 
@@ -73,7 +76,7 @@ public class Board {
 	}
 
 	public void setShips(List<Ship> ships) {
-		//TODO implement
+	    this.ships = ships;
 	}
 
 	public List<Result> getAttacks() {
@@ -97,10 +100,8 @@ public class Board {
 		this.width = width;
 	}
 
-	public int getWidth()
-	{
+	public int getWidth() {
 		return this.width;
 	}
 
-	}
 }
