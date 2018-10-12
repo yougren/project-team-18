@@ -16,7 +16,8 @@ public class Board {
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
 	public Board() {
-
+		ships = new ArrayList<>();
+		attacks = new ArrayList<>();
 		//current, and only board configuration is 10x10
 		this.height = 10;
 		this.width = 10;
@@ -69,8 +70,24 @@ public class Board {
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
 	public Result attack(int x, char y) {
-		//TODO Implement
-		return null;
+		Square target = new Square(x, y);
+		Result rezz = new Result();
+		if(x < 1 || x > 10 || y < 'A' || y > 'J'){
+			rezz.setResult(AtackStatus.INVALID);
+			return rezz;
+		}
+		for (Ship placed : this.getShips()) {                             //cycle through all ships
+			for (Square filled : placed.getOccupiedSquares()) {     //cycle through every square those ships occupy
+				if (filled.getColumn() == target.getColumn() && filled.getRow() == target.getRow()) {                   //break on a conflict
+					rezz.setResult(AtackStatus.HIT);
+					rezz.setShip(placed);
+					rezz.setLocation(filled);
+					return rezz;
+				}
+			}
+		}
+		rezz.setResult(AtackStatus.MISS);
+		return rezz;
 	}
 
 	public List<Ship> getShips() {

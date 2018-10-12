@@ -51,7 +51,7 @@ public class Game {
     }
 
     public static char randCol() {
-        char[] alphabet = {'A','B','C','D','E','F','G','H','I','H'};
+        char[] alphabet = {'A','B','C','D','E','F','G','H','I','J'};
         return alphabet[rand.nextInt(10)];
     }
 
