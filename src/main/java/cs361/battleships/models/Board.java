@@ -20,14 +20,49 @@ public class Board {
 		//current, and only board configuration is 10x10
 		this.height = 10;
 		this.width = 10;
+
+		this.ships = new ArrayList<>();
+		this.attacks = new ArrayList<>();
 	}
 
 	/*
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
 	public boolean placeShip(Ship ship, int x, char y, boolean isVertical) {
-		// TODO Implement
-		return false;
+		//passed square is the top-left of the ship (depending on orientation)
+		//we must check to make sure the squares are not occupied
+
+		List<Square> candidate = ship.getOccupiedSquares();
+
+		//generate a candidate array of locations
+		for(int i = 0; i < ship.getLength(); i++) {
+
+		    //generate coordinates for new squares
+			int XC = x + (isVertical ? 0 : i);
+			int YC = ((int)y + (isVertical ? i : 0) - (int)'A') + 1;  //must convert out of unicode
+
+			//make sure the ship is within the bounds of the board
+			if (XC > this.width || XC < 1 || YC > this.height || YC < 1) { return false; }
+
+			candidate.add(new Square(XC, (char)(YC + 'A')));
+		}
+
+		//ensure the ship is not conflicting with another ship
+         for(Ship placed : this.ships) {                             //cycle through all ships
+            for (Square filled : placed.getOccupiedSquares()) {     //cycle through every square those ships occupy
+                for (Square attempt : candidate) {                  //cycle through every square we want to add.
+                    if (filled.getColumn() == attempt.getColumn() && filled.getRow() == attempt.getRow()) {                   //break on a conflict
+                        return false;
+                    }
+                }
+            }
+         }
+
+		//there were no conflicts, so sync the ship squares and add the ship
+		ship.setOccupiedSquares(candidate);
+		this.ships.add(ship);
+
+		return true;
 	}
 
 	/*
@@ -43,7 +78,7 @@ public class Board {
 	}
 
 	public void setShips(List<Ship> ships) {
-		//TODO implement
+	    this.ships = ships;
 	}
 
 	public List<Result> getAttacks() {
@@ -69,4 +104,5 @@ public class Board {
 	public int getWidth() {
 		return this.width;
 	}
+
 }
