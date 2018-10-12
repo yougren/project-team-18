@@ -17,12 +17,6 @@ public class BoardTest {
     }
 
     @Test
-    public void testBoardGetAttacks() {
-        Board board = new Board();
-
-        assertNotNull(board.getAttacks());
-    }
-    @Test
     public void testBoardHeightInitial() {
         //Initialize board
         Board board = new Board();
@@ -60,9 +54,4 @@ public class BoardTest {
         assertEquals(testWidth, setWidth);
     }
 
-    @Test
-    public void testBoardGetShips(){
-        Board board = new Board();
-        assertNotNull(board.getShips());
-    }
 }
