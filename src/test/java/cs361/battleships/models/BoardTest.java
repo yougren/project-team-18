@@ -1,5 +1,7 @@
 package cs361.battleships.models;
 
+import java.util.List;
+
 import org.junit.Test;
 
 import static junit.framework.TestCase.*;
@@ -51,4 +53,5 @@ public class BoardTest {
         int setWidth = board.getWidth();
         assertEquals(testWidth, setWidth);
     }
+
 }

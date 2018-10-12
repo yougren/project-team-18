@@ -39,8 +39,7 @@ public class Board {
 	}
 
 	public List<Ship> getShips() {
-		//TODO implement
-		return null;
+		return this.ships;
 	}
 
 	public void setShips(List<Ship> ships) {
@@ -48,8 +47,7 @@ public class Board {
 	}
 
 	public List<Result> getAttacks() {
-		//TODO implement
-		return null;
+		return this.attacks;
 	}
 
 	public void setAttacks(List<Result> attacks) {
