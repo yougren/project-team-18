@@ -8,7 +8,7 @@ import java.util.List;
 public class Ship {
 
 	@JsonProperty private List<Square> occupiedSquares;
-  	private int length;
+  	@JsonProperty private int length;
 
 	public Ship(){
 		this.occupiedSquares = new ArrayList<>();

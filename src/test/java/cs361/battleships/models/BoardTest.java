@@ -39,7 +39,7 @@ public class BoardTest {
 
         //initialize our ships for testing
         Ship destroyer = new Ship("DESTROYER");
-        Ship cruiser = new Ship("CRUISER");
+        Ship mine = new Ship("MINESWEEPER");
         Ship battle = new Ship("BATTLESHIP");
 
         //place the first ship, there should be no issue here
@@ -47,11 +47,11 @@ public class BoardTest {
         assertTrue(placeInitial);
 
         //place the second ship starting on the same square
-        boolean placeConflict = board.placeShip(cruiser, 5, 'D', true);
+        boolean placeConflict = board.placeShip(mine, 5, 'D', true);
         assertFalse(placeConflict);
 
         //place another ship so the end of it is crossing the first ship
-        boolean placeConflictEnd = board.placeShip(battle, 3, 'D', false);
+        boolean placeConflictEnd = board.placeShip(battle, 5, 'C', false);
         assertFalse(placeConflictEnd);
     }
 
@@ -59,7 +59,7 @@ public class BoardTest {
     public void testBoardOutOfBoundsPlaceShip() {
         Board board = new Board();
         Ship destroyer = new Ship("DESTROYER");
-        Ship cruiser = new Ship("CRUISER");
+        Ship cruiser = new Ship("BATTLESHIP");
 
         //place outside the board
         boolean placeOut = board.placeShip(destroyer, 15, 'D', false);

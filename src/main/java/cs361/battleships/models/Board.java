@@ -39,13 +39,13 @@ public class Board {
 		for(int i = 0; i < ship.getLength(); i++) {
 
 		    //generate coordinates for new squares
-			int XC = x + (isVertical ? 0 : i);
-			int YC = ((int)y + (isVertical ? i : 0) - (int)'A') + 1;  //must convert out of unicode
+			int XC = x + (isVertical ? i : 0);
+			int YC = ((int)y + (isVertical ? 0 : i) - (int)'A' + 1);  //must convert out of unicode
 
 			//make sure the ship is within the bounds of the board
 			if (XC > this.width || XC < 1 || YC > this.height || YC < 1) { return false; }
 
-			candidate.add(new Square(XC, (char)(YC + 'A')));
+			candidate.add(new Square(XC, (char)(YC - 1 + 'A')));
 		}
 
 		//ensure the ship is not conflicting with another ship
@@ -103,7 +103,7 @@ public class Board {
 	}
 
 	public void setAttacks(List<Result> attacks) {
-		//TODO implement
+	    this.attacks = attacks;
 	}
 
 	public void setHeight(int height) {
