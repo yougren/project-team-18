@@ -30,21 +30,28 @@ public class BoardTest {
     public void testBoardEmptyPlaceShip() {
         Board board = new Board();
         Ship ship = new Ship("DESTROYER");
-        assertTrue(board.placeShip(ship, 10, 'a', false));
+        assertTrue(board.placeShip(ship, 8, 'A', false));
     }
 
     @Test
     public void testBoardConflictPlaceShip() {
         Board board = new Board();
+
+        //initialize our ships for testing
         Ship destroyer = new Ship("DESTROYER");
         Ship cruiser = new Ship("CRUISER");
         Ship battle = new Ship("BATTLESHIP");
 
-        boolean placeInitial = board.placeShip(destroyer, 5, 'd', false);
+        //place the first ship, there should be no issue here
+        boolean placeInitial = board.placeShip(destroyer, 5, 'D', false);
         assertTrue(placeInitial);
-        boolean placeConflict = board.placeShip(cruiser, 5, 'd', true);
+
+        //place the second ship starting on the same square
+        boolean placeConflict = board.placeShip(cruiser, 5, 'D', true);
         assertFalse(placeConflict);
-        boolean placeConflictEnd = board.placeShip(battle, 3, 'd', false);
+
+        //place another ship so the end of it is crossing the first ship
+        boolean placeConflictEnd = board.placeShip(battle, 3, 'D', false);
         assertFalse(placeConflictEnd);
     }
 
@@ -54,9 +61,12 @@ public class BoardTest {
         Ship destroyer = new Ship("DESTROYER");
         Ship cruiser = new Ship("CRUISER");
 
-        boolean placeOut = board.placeShip(destroyer, 5, 'd', false);
+        //place outside the board
+        boolean placeOut = board.placeShip(destroyer, 15, 'D', false);
         assertFalse(placeOut);
-        boolean placeEndOut = board.placeShip(cruiser, 5, 'j', true);
+
+        //place so end is outside
+        boolean placeEndOut = board.placeShip(cruiser, 10, 'J', true);
         assertFalse(placeEndOut);
     }
 
