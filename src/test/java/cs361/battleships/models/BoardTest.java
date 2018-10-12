@@ -1,5 +1,7 @@
 package cs361.battleships.models;
 
+import java.util.List;
+
 import org.junit.Test;
 
 import static junit.framework.TestCase.*;
@@ -14,6 +16,12 @@ public class BoardTest {
         assertTrue(board instanceof Board);
     }
 
+    @Test
+    public void testBoardGetAttacks() {
+        Board board = new Board();
+
+        assertNotNull(board.getAttacks());
+    }
     @Test
     public void testBoardHeightInitial() {
         //Initialize board
@@ -84,5 +92,11 @@ public class BoardTest {
         //Get width, and make sure it is the same
         int setWidth = board.getWidth();
         assertEquals(testWidth, setWidth);
+    }
+
+    @Test
+    public void testBoardGetShips(){
+        Board board = new Board();
+        assertNotNull(board.getShips());
     }
 }
