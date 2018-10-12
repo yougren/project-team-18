@@ -26,6 +26,11 @@ public class Ship {
 
 	public List<Square> getOccupiedSquares() {
 		//TODO implement
-		return null;
+		return this.occupiedSquares;
+		
+	}
+
+	public void setOccupiedSquares(List<Square> squares){
+		this.occupiedSquares = squares;
 	}
 }
