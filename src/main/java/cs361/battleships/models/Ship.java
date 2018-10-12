@@ -17,4 +17,8 @@ public class Ship {
 		return this.occupiedSquares;
 		
 	}
+
+	public void setOccupiedSquares(List<Square> squares){
+		this.occupiedSquares = squares;
+	}
 }
