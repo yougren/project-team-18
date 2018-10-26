@@ -1,8 +1,14 @@
 <#import "../layout/defaultLayout.ftl.html" as layout> 
-<@layout.myLayout "Home page">    
+<@layout.myLayout "Home page">
+
+<div class="header">
+    <h1>BATTLESHIP</h1>
+    <div class="header-right">
+        <a class="active" onclick="reloadfunc()">New Game</a>
+    </div>
+</div>
 
 
-<h1>The Battleship game</h1>
 
 <div id="gameBox">
     <div id="opponentBox" class="board">
@@ -30,5 +36,4 @@
 <script>
     initGame();
 </script>
-
 </@layout.myLayout>
