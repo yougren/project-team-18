@@ -6,21 +6,22 @@ html, body{
     height: 90%;
 }
 .header {
+ width: 60%;
  overflow: hidden;
- background-color: #f1f1f1;
  padding: 20px 10px;
+ border: black;
 }
 
 /* Style the header links */
 .header a {
- width:100%
+
  float: left;
  color: black;
  text-align: center;
  padding: 12px;
  text-decoration: none;
- font-size: 18px;
- line-height: 25px;
+ font-size: 25px;
+ line-height: 40px;
  border-radius: 4px;
 
 }
