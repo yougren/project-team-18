@@ -8,7 +8,12 @@
     </div>
 </div>
 
-
+<div class="sidenav">
+    <button id="place_minesweeper">Minesweeper</button>
+    <button id="place_destroyer">Destroyer</button>
+    <button id="place_battleship">Battleship</button>
+    <button id="vert" onclick="changeVertical()">Flip Ship</button>
+</div>
 
 <div id="gameBox">
     <div id="opponentBox" class="board">
@@ -19,15 +24,6 @@
     <div id="playerBox" class="board">
         <table id="player" class="battleGrid">
         </table>
-    </div>
-
-    <div id="toolbar">
-        <ul>
-            <li><button id="place_minesweeper">Place Minesweeper</button></li>
-            <li><button id="place_destroyer">Place Destroyer</button></li>
-            <li><button id="place_battleship">Place Battleship</button></li>
-            <li><input type="checkbox" id="is_vertical">Vertical</input></li>
-        </ul>
     </div>
 
     <script type="text/javascript" src="/assets/game.js"></script>

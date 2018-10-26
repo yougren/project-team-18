@@ -2,12 +2,14 @@ var isSetup = true;
 var placedShips = 0;
 var game;
 var shipType;
-var vertical;
+var vertical = false;
 
 function reloadfunc() {
    location.reload();
 }
-
+function changeVertical() {
+    vertical = !vertical;
+}
 function makeGrid(table, isPlayer) {
     for (i=0; i<10; i++) {
         let row = document.createElement('tr');
@@ -82,6 +84,7 @@ function cellClick() {
             }
         });
     } else {
+        disableButtons();
         sendXhr("POST", "/attack", {game: game, x: row, y: col}, function(data) {
             game = data;
             redrawGrid();
@@ -107,7 +110,6 @@ function place(size) {
     return function() {
         let row = this.parentNode.rowIndex;
         let col = this.cellIndex;
-        vertical = document.getElementById("is_vertical").checked;
         let table = document.getElementById("player");
         for (let i=0; i<size; i++) {
             let cell;
@@ -129,7 +131,16 @@ function place(size) {
         }
     }
 }
-
+function disableButtons() {
+    var a = document.getElementById("place_minesweeper");
+    var b = document.getElementById("place_battleship");
+    var c = document.getElementById("place_destroyer");
+    var d = document.getElementById("vert");
+    a.style.display = "none";
+    b.style.display = "none";
+    c.style.display = "none";
+    d.style.display = "none";
+}
 function initGame() {
     makeGrid(document.getElementById("opponent"), false);
     makeGrid(document.getElementById("player"), true);
