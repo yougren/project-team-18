@@ -157,6 +157,9 @@ td:hover {
     display: block;
     border-bottom: 5px solid black;
 }
+#vert {
+    color: red;
+}
 .sidenav a:hover {
     color: #f1f1f1;
 }
