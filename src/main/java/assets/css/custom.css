@@ -6,10 +6,13 @@ html, body{
     height: 90%;
 }
 .header {
+background-color: rgba(0, 0, 255, 0.1);
  width: 60%;
  overflow: hidden;
  padding: 20px 10px;
  border: black;
+ border-width: 5px;
+ border-background: black;
 }
 
 /* Style the header links */
@@ -22,6 +25,7 @@ html, body{
  text-decoration: none;
  font-size: 25px;
  line-height: 40px;
+ border color: black;
  border-radius: 4px;
 
 }
