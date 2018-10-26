@@ -2,8 +2,14 @@
 -------------------------------------------------- */
 
 html, body{
-    margin: 5px;
-    height: 95%;
+    padding: 5px;
+    height: 90%;
+}
+
+body {
+    background-image: url("BATTSHIPSVS.PNG");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 footer{
@@ -13,8 +19,13 @@ footer{
 hr{
     display: none;
 }
-.container{
-    border: 2px solid black;
+
+.container {
+    height: 100%;
+    width: 100%;
+}
+
+#gameBox{
     border-radius: 5px;
     display: flex;
     justify-content: space-around;
