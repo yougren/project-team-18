@@ -4,6 +4,10 @@ var game;
 var shipType;
 var vertical;
 
+function reloadfunc() {
+   location.reload();
+}
+
 function makeGrid(table, isPlayer) {
     for (i=0; i<10; i++) {
         let row = document.createElement('tr');

@@ -22,7 +22,11 @@ background-color: rgba(0, 0, 255, 1);
  padding: 12px;
  text-decoration: none;
  font-size: 25px;
+<<<<<<< HEAD
  line-height: 20px;
+=======
+ line-height: 40px;
+>>>>>>> aa374205fec0c9493916c12e15e3d30ad82d8cc2
  border color: black;
  border-radius: 4px;
 
@@ -30,7 +34,10 @@ background-color: rgba(0, 0, 255, 1);
 .header a:hover {
  background-color: #ddd;
  color: black;
+<<<<<<< HEAD
  cursor: pointer;
+=======
+>>>>>>> aa374205fec0c9493916c12e15e3d30ad82d8cc2
 }
 .header-right {
   float: right;
