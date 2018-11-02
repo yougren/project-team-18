@@ -3,6 +3,8 @@ package cs361.battleships.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Character.toUpperCase;
+
 public class Board {
 
 	//Initialize private members for game variables
@@ -32,7 +34,7 @@ public class Board {
 	public boolean placeShip(Ship ship, int x, char y, boolean isVertical) {
 		//passed square is the top-left of the ship (depending on orientation)
 		//we must check to make sure the squares are not occupied
-
+		y = toUpperCase(y);
 		List<Square> candidate = ship.getOccupiedSquares();
 
 		//generate a candidate array of locations
@@ -70,12 +72,12 @@ public class Board {
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
 	public Result attack(int x, char y) {
-		Square target = new Square(x, y);
+		Square target = new Square(x, toUpperCase(y));
 		Result rezz = new Result();
 
 		//check against board dimensions
-		if(x < 1 || x > 10 || y < 'A' || y > 'J'){
-			rezz.setResult(AtackStatus.INVALID);
+		if(target.getRow() < 1 || target.getRow() > 10 || target.getColumn() < 'A' || target.getColumn() > 'J'){
+			rezz.setResult(AttackStatus.INVALID);
 			return rezz;
 		}
 
@@ -83,7 +85,7 @@ public class Board {
 		for (Result att : this.attacks) {
 		    Square filled = att.getLocation();
             if (filled.getColumn() == target.getColumn() && filled.getRow() == target.getRow()) {   //it is a hit
-                rezz.setResult(AtackStatus.INVALID);
+                rezz.setResult(AttackStatus.INVALID);
                 return rezz;
             }
         }
@@ -93,7 +95,7 @@ public class Board {
 		for (Ship placed : this.getShips()) {                             //cycle through all ships
 			for (Square filled : placed.getOccupiedSquares()) {     //cycle through every square those ships occupy
 				if (filled.getColumn() == target.getColumn() && filled.getRow() == target.getRow()) {   //it is a hit
-					rezz.setResult(AtackStatus.HIT);
+					rezz.setResult(AttackStatus.HIT);
 					rezz.setShip(placed);
 					this.attacks.add(rezz);
 					return rezz;
@@ -102,7 +104,7 @@ public class Board {
 		}
 
 		this.attacks.add(rezz);
-		rezz.setResult(AtackStatus.MISS);
+		rezz.setResult(AttackStatus.MISS);
 		return rezz;
 	}
 
