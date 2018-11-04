@@ -35,12 +35,12 @@ public class Game {
     }
 
     public boolean attack() {
-        boolean opponentAttackResult;
+        boolean attackFail;
         do {
             // AI does random attacks, so it might attack the same spot twice
             // let it try until it gets it right
-            opponentAttackResult = opponentsBoard.attack(randRow(), randCol()).getResult() != AttackStatus.INVALID;
-        } while(opponentAttackResult);
+            attackFail = playersBoard.attack(randRow(), randCol()).getResult() == AttackStatus.INVALID;
+        } while(attackFail);
 
         return true;
     }
