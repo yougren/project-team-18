@@ -2,11 +2,7 @@ package cs361.battleships.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
-
-import static cs361.battleships.models.AtackStatus.*;
 
 public class Game {
 
@@ -17,16 +13,15 @@ public class Game {
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
     public boolean placeShip(Ship ship, int x, char y, boolean isVertical) {
-        boolean successful = playersBoard.placeShip(ship, x, y, isVertical);
-        if (!successful)
-            return false;
+        return playersBoard.placeShip(ship, x, y, isVertical);
+    }
 
-        Ship opShip = new Ship(ship.getLength());
+    public boolean placeShip(Ship ship) {
         boolean opponentPlacedSuccessfully;
         do {
             // AI places random ships, so it might try and place overlapping ships
             // let it try until it gets it right
-            opponentPlacedSuccessfully = opponentsBoard.placeShip(opShip, randRow(), randCol(), randVertical());
+            opponentPlacedSuccessfully = opponentsBoard.placeShip(ship, randRow(), randCol(), randVertical());
         } while (!opponentPlacedSuccessfully);
 
         return true;
@@ -36,19 +31,16 @@ public class Game {
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
     public boolean attack(int x, char  y) {
-        Result playerAttack = opponentsBoard.attack(x, y);
+        return opponentsBoard.attack(x, y).getResult() != AttackStatus.INVALID;
+    }
 
-        if (playerAttack.getResult() == AtackStatus.INVALID) {
-            return false;
-        }
-
-        Result opponentAttackResult;
+    public boolean attack() {
+        boolean attackFail;
         do {
             // AI does random attacks, so it might attack the same spot twice
             // let it try until it gets it right
-
-            opponentAttackResult = playersBoard.attack(randRow(), randCol());
-        } while(opponentAttackResult.getResult() == AtackStatus.INVALID);
+            attackFail = playersBoard.attack(randRow(), randCol()).getResult() == AttackStatus.INVALID;
+        } while(attackFail);
 
         return true;
     }

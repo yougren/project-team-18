@@ -9,9 +9,9 @@ public class ResultTest {
     @Test
     public void testGetSetResult(){
         Result res = new Result();
-        res.setResult(AtackStatus.HIT);
-        AtackStatus ret = res.getResult();
-        assertEquals(AtackStatus.HIT, ret);
+        res.setResult(AttackStatus.HIT);
+        AttackStatus ret = res.getResult();
+        assertEquals(AttackStatus.HIT, ret);
     }
 
     @Test
@@ -26,9 +26,15 @@ public class ResultTest {
     @Test
     public void testGetSetShip() {
         Result res = new Result();
-        Ship test = new Ship("DESTROYER");
-        res.setShip(test);
-        Ship ret = res.getShip();
-        assertEquals(test, ret);
+        Dock dock = new Dock();
+        dock.registerClass("BATTLESHIP", Battleship.class);
+        try {
+            Ship test = dock.deploy("BATTLESHIP");
+            res.setShip(test);
+            Ship ret = res.getShip();
+            assertEquals(test, ret);
+        } catch (Exception e) {
+            assertEquals(true, false);
+        }
     }
 }
