@@ -46,8 +46,10 @@ public class Board {
 
 			//make sure the ship is within the bounds of the board
 			if (XC > this.width || XC < 1 || YC > this.height || YC < 1) { return false; }
-
-			candidate.add(new Square(XC, (char)(YC - 1 + 'A')));
+			if (ship.getLength() == 2 && i == 0) { candidate.add(new Square(XC, (char)(YC - 1 + 'A'), true)); }
+			else if (ship.getLength() == 3 && i == 1) { candidate.add(new Square(XC, (char)(YC - 1 + 'A'), true)); }
+			else if (ship.getLength() == 4 && i == 2) { candidate.add(new Square(XC, (char)(YC - 1 + 'A'), true)); }
+			else { candidate.add(new Square(XC, (char)(YC - 1 + 'A'))); };
 		}
 
 		//ensure the ship is not conflicting with another ship
