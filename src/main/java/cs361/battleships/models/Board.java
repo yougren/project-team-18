@@ -97,6 +97,13 @@ public class Board {
 		for (Ship placed : this.getShips()) {                             //cycle through all ships
 			for (Square filled : placed.getOccupiedSquares()) {     //cycle through every square those ships occupy
 				if (filled.getColumn() == target.getColumn() && filled.getRow() == target.getRow()) {   //it is a hit
+					if(filled.isCaptainsQuarter()) {
+						for (Square s : placed.getOccupiedSquares()) {
+							if (s != filled) {
+								attack(s.getRow(), s.getColumn());
+							}
+						}
+					}
 					rezz.setResult(AttackStatus.HIT);
 					rezz.setShip(placed);
 					this.attacks.add(rezz);
@@ -109,7 +116,6 @@ public class Board {
 		rezz.setResult(AttackStatus.MISS);
 		return rezz;
 	}
-
 	public List<Ship> getShips() {
 		return this.ships;
 	}
