@@ -5,21 +5,19 @@ public class Square {
 
 	private int row;
 	private char column;
-	private boolean capFlag;
+	private boolean captainsQuarter;
 
-	public Square(){
-
-	}
+	public Square(){ }
 	public Square(int row, char column) {
 		this(row, column, false);
 	}
 	public Square(int row, char column, boolean capFlag) {
 		this.row = row;
 		this.column = column;
-		this.capFlag = capFlag;
+		this.captainsQuarter = capFlag;
 	}
 	public boolean isCaptainsQuarter() {
-		return capFlag;
+		return captainsQuarter;
 	}
 
 	public char getColumn() {
