@@ -46,8 +46,10 @@ public class Board {
 
 			//make sure the ship is within the bounds of the board
 			if (XC > this.width || XC < 1 || YC > this.height || YC < 1) { return false; }
-
-			candidate.add(new Square(XC, (char)(YC - 1 + 'A')));
+			if (ship.getLength() == 2 && i == 0) { candidate.add(new Square(XC, (char)(YC - 1 + 'A'), true, 1)); }
+			else if (ship.getLength() == 3 && i == 1) { candidate.add(new Square(XC, (char)(YC - 1 + 'A'), true, 0)); }
+			else if (ship.getLength() == 4 && i == 2) { candidate.add(new Square(XC, (char)(YC - 1 + 'A'), true, 0)); }
+			else { candidate.add(new Square(XC, (char)(YC - 1 + 'A'))); };
 		}
 
 		//ensure the ship is not conflicting with another ship
@@ -84,8 +86,8 @@ public class Board {
 		//check against previous attacks
 		for (Result att : this.attacks) {
 		    Square filled = att.getLocation();
-            if (filled.getColumn() == target.getColumn() && filled.getRow() == target.getRow()) {   //it is a hit
-                rezz.setResult(AttackStatus.INVALID);
+            if (filled.getColumn() == target.getColumn() && filled.getRow() == target.getRow()) {//it is a hit
+            	rezz.setResult(AttackStatus.INVALID);
                 return rezz;
             }
         }
@@ -95,6 +97,20 @@ public class Board {
 		for (Ship placed : this.getShips()) {                             //cycle through all ships
 			for (Square filled : placed.getOccupiedSquares()) {     //cycle through every square those ships occupy
 				if (filled.getColumn() == target.getColumn() && filled.getRow() == target.getRow()) {   //it is a hit
+					if(filled.isCaptainsQuarter()) {
+						if (filled.getHitCount() == 1) {
+							for (Square s : placed.getOccupiedSquares()) {
+								if (s != filled) {
+									attack(s.getRow(), s.getColumn());
+								}
+							}
+						}
+						else {
+							filled.setHitCount(1);
+							rezz.setResult(AttackStatus.MISS);
+							return rezz;
+						}
+					}
 					rezz.setResult(AttackStatus.HIT);
 					rezz.setShip(placed);
 					this.attacks.add(rezz);
@@ -107,7 +123,6 @@ public class Board {
 		rezz.setResult(AttackStatus.MISS);
 		return rezz;
 	}
-
 	public List<Ship> getShips() {
 		return this.ships;
 	}
